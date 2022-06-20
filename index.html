@@ -1,0 +1,493 @@
+<html>
+<head>
+  <title>Real Time Image Identification App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
+  <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+    <meta name="description" content="Use this HTML basic website two columns liquid, side fixed layout template where the main content is on the left column, the navigation menu and the extra stuff are on the right column.">
+    <meta name="generator" content="HAPedit 3.1">
+    <link rel="canonical" href="https://www.w3docs.com/snippets/html/layout_templates/23.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="HTML FlexBox Template - Two columns liquid, side fixed, left content" />
+    <meta property="og:description" content="Use this HTML basic website two columns liquid, side fixed layout template where the main content is on the left column, the navigation menu and the extra stuff are on the right column." />
+    <meta property="og:image" content="https://www.w3docs.com/build/images/logo-amp.png" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="192" />
+    <meta property="og:image:height" content="192" />
+    <meta property="og:image:alt" content="W3dcos" />
+    <style type="text/css">
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            color: #292929;
+            font: 90% Roboto, Arial, sans-serif;
+            font-weight: 300;
+        }
+
+        p {
+            padding: 0 10px;
+            line-height: 1.8;
+        }
+
+        ul li {
+            padding-right: 10px;
+            line-height: 1.6;
+        }
+
+        h3 {
+            padding: 5px 20px;
+            margin: 0;
+        }
+
+        div#header {
+            position: relative;
+        }
+
+        div#header h1 {
+            height: 80px;
+            line-height: 80px;
+            margin: 0;
+            padding-left: 10px;
+            background: #e0e0e0;
+            color: #292929;
+        }
+
+        div#header a {
+            position: absolute;
+            right: 0;
+            top: 23px;
+            padding: 10px;
+            color: #006;
+        }
+
+        div#navigation {
+            background-color: lightblue;
+            border-radius: 20px;
+            max-width: 500px;
+            margin-top: 5px;
+        }
+
+        div#navigation li {
+            list-style: none;
+        }
+
+        div#extra {
+            background: #147FA9;
+        }
+
+        div#footer {
+            background: #42444e;
+            color: #fff;
+        }
+
+        div#footer p {
+            padding: 20px 10px;
+        }
+
+        div#wrapper {
+            float: left;
+            width: 100%;
+            margin-left: -200px
+        }
+
+        div#content {
+            margin-left: 200px
+        }
+
+        div#navigation {
+            float: right;
+            width: 200px;
+            padding-right: 300px;
+        }
+
+        div#extra {
+            float: right;
+            clear: right;
+            width: 200px;
+            padding-right: 300px;
+        }
+
+        div#footer {
+            clear: both;
+            width: 100%
+        }
+    </style>
+
+</head>
+<body style="background-color:whitesmoke">
+  <div style="margin-top: 20px; background-color:lightgray;">
+    <h1 style="font-family:'Courier New', Courier, monospace; text-align:center; background-color: white; max-width: 900px; border-radius: 20px; margin-left: 400px;">Comparision Between Google Lens and MobileNet</h1>
+    <label class="btn btn-info" style="margin-left: 90px;">Google Lens</label>
+    <label class="btn btn-primary" style="margin-left:100px">MobileNet</label>
+  </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+       <div style="text-align:center;"><img src="Google-lens.png" class="img-responsive" style="max-height: 90px; max-width:90px; text-align:center; margin-left: 800px;"><br>
+      <h1 style="margin-left: 819px; font-family: 'Courier New', Courier, monospace;">VS</h1><br>
+    <h1 style="margin-left: 750px; font-family: 'Courier New', Courier, monospace;">MobileNet</h1></div>
+    </div>
+    
+
+<hr color="black">
+    <div id="container" style="background-color:lightgray;">
+      <div id="wrapper">
+          <div id="content">
+            <div class="modal fade" id="myModal" role="dialog">
+              <div class="modal-dialog">
+              
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><u>Outputs</u></h4>
+                  </div>
+                  <div class="modal-body">
+                    <p style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Output on Google-lens: PILLOW</p>
+                    <p style="font-size:20px; font-family:'Courier New', Courier, monospace;">Output on MobileNet: BALL</p>
+                    <h2>Google-lens Is more accurate</h2>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+
+            <div class="modal fade" id="myModal1" role="dialog">
+              <div class="modal-dialog">
+              
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><u>Outputs</u></h4>
+                  </div>
+                  <div class="modal-body">
+                    <p style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Output on Google-lens: DIARY </p>
+                    <p style="font-size:20px; font-family:'Courier New', Courier, monospace;">Output on MobileNet: BOOK</p>
+                    <h2>MobileNet is more accurate</h2>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+
+            <div class="modal fade" id="myModal2" role="dialog">
+              <div class="modal-dialog">
+              
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><u>Outputs</u></h4>
+                  </div>
+                  <div class="modal-body">
+                    <p style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Output on Google-lens: COVER</p>
+                    <p style="font-size:20px; font-family:'Courier New', Courier, monospace;">Output on MobileNet: COVER </p>
+                    <h2>Draw</h2>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+
+            <div class="modal fade" id="myModal3" role="dialog">
+              <div class="modal-dialog">
+              
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><u>Outputs</u></h4>
+                  </div>
+                  <div class="modal-body">
+                    <p style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Output on Google-lens: DIARY</p>
+                    <p style="font-size:20px; font-family:'Courier New', Courier, monospace;">Output on MobileNet: BOOK</p>
+                    <h2>Google-lens is more accurate</h2>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+
+            <div class="modal fade" id="myModal4" role="dialog">
+              <div class="modal-dialog">
+              
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><u>Outputs</u></h4>
+                  </div>
+                  <div class="modal-body">
+                    <p style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Output on Google-lens: Bottle </p>
+                    <p style="font-size:20px; font-family:'Courier New', Courier, monospace;">Output on MobileNet: Color</p>
+                    <h2>None of them is correct</h2>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+
+            <div class="modal fade" id="myModal5" role="dialog">
+              <div class="modal-dialog">
+              
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><u>Outputs</u></h4>
+                  </div>
+                  <div class="modal-body">
+                    <p style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Output on Google-lens:Headphones </p>
+                    <p style="font-size:20px; font-family:'Courier New', Courier, monospace;">Output on MobileNet: Headphones</p>
+                    <h2>Both are correct</h2>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+
+            <div class="modal fade" id="myModal6" role="dialog">
+              <div class="modal-dialog">
+              
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><u>Outputs</u></h4>
+                  </div>
+                  <div class="modal-body">
+                    <p style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Output on Google-lens: Measuring tape</p>
+                    <p style="font-size:20px; font-family:'Courier New', Courier, monospace;">Output on MobileNet: Scale</p>
+                    <h2>MobileNet is more accurate</h2>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+
+            <div class="modal fade" id="myModal7" role="dialog">
+              <div class="modal-dialog">
+              
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><u>Outputs</u></h4>
+                  </div>
+                  <div class="modal-body">
+                    <p style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Output on Google-lens: Spectacles</p>
+                    <p style="font-size:20px; font-family:'Courier New', Courier, monospace;">Output on MobileNet:Goggles</p>
+                    <h2>Google-lens is more accurate</h2>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+
+            <div class="modal fade" id="myModal8" role="dialog">
+              <div class="modal-dialog">
+              
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><u>Outputs</u></h4>
+                  </div>
+                  <div class="modal-body">
+                    <p style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Output on Google-lens: circle</p>
+                    <p style="font-size:20px; font-family:'Courier New', Courier, monospace;">Output on MobileNet: circle</p>
+                    <h2>DRAW</h2>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+
+            <div class="modal fade" id="myModal9" role="dialog">
+              <div class="modal-dialog">
+              
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><u>Outputs</u></h4>
+                  </div>
+                  <div class="modal-body">
+                    <p style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Output on Google-lens: Watch</p>
+                    <p style="font-size:20px; font-family:'Courier New', Courier, monospace;">Output on MobileNet: Watch</p>
+                    <h2>DRAW</h2>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
+            <ol>
+              <div class="text_images_and_result"  style="margin-left: 200px;">
+                  <li>
+                      <b style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Test Image :-</b>
+                      <img src="pillow.jpg" class="img-responsive">
+                  </li>
+      
+                 <button class="btn btn-primary" style="margin-top:10px; font-family:'Courier New', Courier, monospace; max-width: 800px; padding-left:100px; padding-right: 100px;" id="btn1" data-toggle="modal" data-target="#myModal">Output</button>
+      
+                  <div class="mini_result">
+                      <h4>Result: </h4>
+                      <h4>Draw</h4>
+                  </div>
+              </div>
+              <br><br>
+              <div class="text_images_and_result"  style="margin-left: 200px;">
+                <li>
+                    <b style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Test Image :-</b>
+                    <img src="book.jpg" class="img-responsive">
+                </li>
+    
+               <button class="btn btn-primary" style="margin-top:10px; font-family:'Courier New', Courier, monospace; max-width: 800px; padding-left:100px; padding-right: 100px;" id="btn1" data-toggle="modal" data-target="#myModal1">Output</button>
+    
+                <div class="mini_result">
+                    <h4>Result: </h4>
+                    <h4>Draw</h4>
+                </div>
+            </div>
+            <div class="text_images_and_result"  style="margin-left: 200px;">
+              <li>
+                  <b style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Test Image :-</b>
+                  <img src="case.jpg" class="img-responsive">
+              </li>
+  
+             <button class="btn btn-primary" style="margin-top:10px; font-family:'Courier New', Courier, monospace; max-width: 800px; padding-left:100px; padding-right: 100px;" id="btn1" data-toggle="modal" data-target="#myModal2">Output</button>
+  
+              <div class="mini_result">
+                  <h4>Result: </h4>
+                  <h4>Draw</h4>
+              </div>
+          </div>
+          <div class="text_images_and_result"  style="margin-left: 200px;">
+            <li>
+                <b style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Test Image :-</b>
+                <img src="diary.jpg" class="img-responsive">
+            </li>
+
+           <button class="btn btn-primary" style="margin-top:10px; font-family:'Courier New', Courier, monospace; max-width: 800px; padding-left:100px; padding-right: 100px;" id="btn1" data-toggle="modal" data-target="#myModal3">Output</button>
+
+            <div class="mini_result">
+                <h4>Result: </h4>
+                <h4>Draw</h4>
+            </div>
+        </div>
+        <div class="text_images_and_result"  style="margin-left: 200px;">
+          <li>
+              <b style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Test Image :-</b>
+              <img src="glue.jpg" class="img-responsive">
+          </li>
+
+         <button class="btn btn-primary" style="margin-top:10px; font-family:'Courier New', Courier, monospace; max-width: 800px; padding-left:100px; padding-right: 100px;" id="btn1" data-toggle="modal" data-target="#myModal4">Output</button>
+
+          <div class="mini_result">
+              <h4>Result: </h4>
+              <h4>Draw</h4>
+          </div>
+      </div>
+      <div class="text_images_and_result"  style="margin-left: 200px;">
+        <li>
+            <b style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Test Image :-</b>
+            <img src="headphone.jpg" class="img-responsive">
+        </li>
+
+       <button class="btn btn-primary" style="margin-top:10px; font-family:'Courier New', Courier, monospace; max-width: 800px; padding-left:100px; padding-right: 100px;" id="btn1" data-toggle="modal" data-target="#myModal5">Output</button>
+
+        <div class="mini_result">
+            <h4>Result: </h4>
+            <h4>Draw</h4>
+        </div>
+    </div>
+    <div class="text_images_and_result"  style="margin-left: 200px;">
+      <li>
+          <b style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Test Image :-</b>
+          <img src="scale.jpg" class="img-responsive">
+      </li>
+
+     <button class="btn btn-primary" style="margin-top:10px; font-family:'Courier New', Courier, monospace; max-width: 800px; padding-left:100px; padding-right: 100px;" id="btn1" data-toggle="modal" data-target="#myModal6">Output</button>
+
+      <div class="mini_result">
+          <h4>Result: </h4>
+          <h4>Draw</h4>
+      </div>
+  </div>
+  <div class="text_images_and_result"  style="margin-left: 200px;">
+    <li>
+        <b style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Test Image :-</b>
+        <img src="specks.jpg" class="img-responsive">
+    </li>
+
+   <button class="btn btn-primary" style="margin-top:10px; font-family:'Courier New', Courier, monospace; max-width: 800px; padding-left:100px; padding-right: 100px;" id="btn1" data-toggle="modal" data-target="#myModal7">Output</button>
+
+    <div class="mini_result">
+        <h4>Result: </h4>
+        <h4>Draw</h4>
+    </div>
+</div>
+<div class="text_images_and_result"  style="margin-left: 200px;">
+  <li>
+      <b style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Test Image :-</b>
+      <img src="tape.jpg" class="img-responsive">
+  </li>
+
+ <button class="btn btn-primary" style="margin-top:10px; font-family:'Courier New', Courier, monospace; max-width: 800px; padding-left:100px; padding-right: 100px;" id="btn1" data-toggle="modal" data-target="#myModal8">Output</button>
+
+  <div class="mini_result">
+      <h4>Result: </h4>
+      <h4>Draw</h4>
+  </div>
+</div>
+<div class="text_images_and_result"  style="margin-left: 200px;">
+  <li>
+      <b style="font-size:20px; font-family: 'Courier New', Courier, monospace;">Test Image :-</b>
+      <img src="watch.jpg" class="img-responsive">
+  </li>
+
+ <button class="btn btn-primary" style="margin-top:10px; font-family:'Courier New', Courier, monospace; max-width: 800px; padding-left:100px; padding-right: 100px;" id="btn1" data-toggle="modal" data-target="#myModal9">Output</button>
+
+  <div class="mini_result">
+      <h4>Result: </h4>
+      <h4>Draw</h4>
+  </div>
+</div>
+          </ol>
+
+          <div style="margin-left:200px; background-color: lightblue; border-radius: 20px;">
+            <h2 style="margin-left:200px; background-color: lightblue; border-radius: 20px; margin-left: 90px; white-space: pre-line; ">I tested with ten objects using MobileNet and Google-lens and <br>Google-lens proved more accurate</h2>
+          </div>
+</body>
